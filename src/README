@@ -1,0 +1,19 @@
+Musat-Burcea Adrian 332CB - APD Tema 3
+
+Implementare topologie:
+Fiecare coordonator isi citeste configuratia clusterului din fisiere si isi
+informeaza workerii de faptul ca el este coordonatorul lor. Dupa accea, coordonatorul
+0 trimite topologia sa la coordonatorul 1, care adauga la topologie si informatia despre
+clusterul lui trimite mai departe la coordonatorul 2, etc. Astfel, ajuns la coordonatorul
+se cunoaste toata topologia, acesta afisand-o. O trimite si la workeri pt afisare, apoi
+o trimite iar pe traseul 0->1->2 pt a fi afisata si de ceilalti coordonatori si workerii lor.
+
+Implementare calcul:
+coordonatorul 0 genereaza vectorul. Apoi imparte elementele din vector la workerii sai
+in functie de nr de elemente ramase din vector si de nr de workeri ramasi disponibili si
+trimite la workerii sai chunkurile din vector pt calcul. Apoi trimite vectorul mare la 
+ceilalti coordonatori pe traseul 0->1->2->3 si informatiile despre nr de elemente ramase
+si de workeri disponibili. Ceilalti coordonatori fac apoi acelasi lucru. Workerii realizeaza
+operatia de inmultire pe fiecare element din chunkurile primite, apoi trimit rezultatele
+la coordonatorul lor. Vectorul rezultat se asambleaza pe traseul 1->2->3->0 si se afiseaza
+la final rezultatul.
